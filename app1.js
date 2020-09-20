@@ -25,21 +25,21 @@ const fruit=new Fruit({
 })
 
 // fruit.save();
-// const kiwi=new Fruit({
-//     name:"KIWI",
-//     rating:10,
-//     review:"the best fruit"
-// });
-// const banana=new Fruit({
-//     name:"Banana",
-//     rating:7,
-//     review:"the long fruit"
-// });
-// const orange=new Fruit({
-//     name:"Orange",
-//     rating:9,
-//     review:"the Sour fruit"
-// });
+const kiwi=new Fruit({
+    name:"KIWI",
+    rating:10,
+    review:"the best fruit"
+});
+const banana=new Fruit({
+    name:"Banana",
+    rating:7,
+    review:"the long fruit"
+});
+const orange=new Fruit({
+    name:"Orange",
+    rating:9,
+    review:"the Sour fruit"
+});
 
 // Fruit.insertMany([kiwi,banana,orange,fruit],function(err){
 //     if(err){
@@ -48,7 +48,7 @@ const fruit=new Fruit({
 //         console.log("successfully run without error");
 //     }
 // })
-
+kiwi.save();
 
 
 Fruit.find((err,fruits)=>{
@@ -62,37 +62,54 @@ Fruit.find((err,fruits)=>{
     }
 })
 
-Fruit.updateOne({_id:"5f673ed3bd15410cec00f19c"},{name:"Mango"},function(err){
-    if(err){
-        console.log(err);
-    }else{
-        console.log("successfulyy update");
-    }
-})
-
-Fruit.deleteOne({name:["KIWI","Banana","Orange"]},function(err){
-    if(err){
-        console.log(err);
-    }else{
-        console.log("successfully deleted");
-    }
-})
-
-
-
-
-
-
-// const personSchema=new mongoose.Schema({
-//     name:String,
-//     age:Number
+// Fruit.updateOne({_id:"5f673ed3bd15410cec00f19c"},{name:"Mango"},function(err){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("successfulyy update");
+//     }
 // })
 
-// const Person=mongoose.model("Person",personSchema)
-
-// const person=new Person({
-//     name:"Jhon",
-//     age:34
+// Fruit.deleteOne({name:["KIWI","Banana","Orange"]},function(err){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("successfully deleted");
+//     }
 // })
+
+
+
+
+
+
+const personSchema=new mongoose.Schema({
+    name:String,
+    age:Number,
+    favoriteFruit: fruitSchema
+})
+
+const Person=mongoose.model("Person",personSchema)
+
+const pineapple=new Fruit({
+    name:"Pineapple",
+    rating:8,
+    review:"I hate this one"
+});
+pineapple.save();
+
+const person=new Person({
+    name:"Jhon",
+    age:34,
+    favoriteFruit:kiwi
+
+})
 // person.save()
 
+// Person.deleteMany({name:"Jhon"},function(err){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("successfully deleted");
+//     }
+// })
