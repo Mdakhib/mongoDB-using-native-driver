@@ -5,33 +5,40 @@ const mongoose=require('mongoose');
 mongoose.connect("mongodb://localhost:27017/fruitsDB",{useNewUrlParser:true, useUnifiedTopology: true });
 
 const fruitSchema=new mongoose.Schema({
-    name:String,
-    rating:Number,
+    name:{
+        type:String,
+        required:[1,"pls enter ur name"]
+    },
+    rating:{
+        type:Number,
+        min:1,
+        max:10
+    },
     review:String
 });
 
 const Fruit=mongoose.model("Fruit",fruitSchema)
 const fruit=new Fruit({
-    name:"APPLE",
-    rating:8,
+    rating:30,
     review:"pretty solid as a fruit"
 })
 
-const kiwi=new Fruit({
-    name:"KIWI",
-    rating:10,
-    review:"the best fruit"
-});
-const banana=new Fruit({
-    name:"Banana",
-    rating:7,
-    review:"the long fruit"
-});
-const orange=new Fruit({
-    name:"Orange",
-    rating:9,
-    review:"the Sour fruit"
-});
+fruit.save();
+// const kiwi=new Fruit({
+//     name:"KIWI",
+//     rating:10,
+//     review:"the best fruit"
+// });
+// const banana=new Fruit({
+//     name:"Banana",
+//     rating:7,
+//     review:"the long fruit"
+// });
+// const orange=new Fruit({
+//     name:"Orange",
+//     rating:9,
+//     review:"the Sour fruit"
+// });
 
 // Fruit.insertMany([kiwi,banana,orange,fruit],function(err){
 //     if(err){
@@ -41,7 +48,7 @@ const orange=new Fruit({
 //     }
 // })
 
-// fruit.save();
+
 
 Fruit.find((err,fruits)=>{
     if(err){
